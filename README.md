@@ -74,7 +74,6 @@ module "event_hub_namespace" {
         action  = "Allow"
       }
     }
-
   }
 }
 ```
