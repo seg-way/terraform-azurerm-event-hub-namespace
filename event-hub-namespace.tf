@@ -35,7 +35,7 @@ resource "azurerm_eventhub_namespace" "evh" {
         for_each = lookup(var.settings.network_rulesets, "virtual_network_rule", {}) != {} ? [1] : []
         content {
           subnet_id                                       = lookup(var.settings.network_rulesets.virtual_network_rule, "subnet_id", null)
-          ignore_missing_virtual_network_service_endpoint = lookup(var.settings.network_rulesets.virtual_network_rule, "subnet_id", false)
+          ignore_missing_virtual_network_service_endpoint = lookup(var.settings.network_rulesets.virtual_network_rule, "ignore_missing_virtual_network_service_endpoint", false)
         }
       }
 
