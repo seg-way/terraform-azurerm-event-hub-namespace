@@ -26,24 +26,24 @@ resource "azurerm_eventhub_namespace" "evh" {
   }
 
   dynamic "network_rulesets" {
-    for_each = lookup(var.settings.network_rulesets, "network_rulesets", {}) != {} ? [1] : []
+    for_each = lookup(var.settings, "network_rulesets", {}) != {} ? [1] : []
     content {
-      default_action                 = network_rulesets.value.default_action #Possible values are Allow and Deny. Defaults to Deny.
-      trusted_service_access_enabled = try(network_rulesets.value.trusted_service_access_enabled, null)
+      default_action                 = lookup(var.settings.network_rulesets, "default_action", null)
+      trusted_service_access_enabled = lookup(var.settings.network_rulesets, "trusted_service_access_enabled", true)
 
       dynamic "virtual_network_rule" {
-        for_each = lookup(var.settings.network_rulesets.virtual_network_rule, "virtual_network_rule", {}) != {} ? [1] : []
+        for_each = lookup(var.settings.network_rulesets, "virtual_network_rule", {}) != {} ? [1] : []
         content {
-          subnet_id                                       = virtual_network_rule.value.subnet_id
-          ignore_missing_virtual_network_service_endpoint = try(virtual_network_rule.value.ignore_missing_virtual_network_service_endpoint, null)
+          subnet_id                                       = lookup(var.settings.network_rulesets.virtual_network_rule, "subnet_id", null)
+          ignore_missing_virtual_network_service_endpoint = lookup(var.settings.network_rulesets.virtual_network_rule, "subnet_id", null)
         }
       }
 
       dynamic "ip_rule" {
-        for_each = lookup(var.settings.network_rulesets.ip_rule, "ip_rule", {}) != {} ? [1] : []
+        for_each = lookup(var.settings.network_rulesets, "ip_rule", {}) != {} ? [1] : []
         content {
-          ip_mask = ip_rule.value.ip_mask
-          action  = try(ip_rule.value.action, null)
+          ip_mask = lookup(var.settings.network_rulesets.ip_rule, "ip_mask", null)
+          action  = lookup(var.settings.network_rulesets.ip_rule, "action", null)
         }
       }
     }
