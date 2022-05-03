@@ -1,32 +1,45 @@
-output "sa_id" {
-  value       = azurerm_storage_account.sa.id
-  description = "The ID of the storage account"
+output "id" {
+  description = "The EventHub Namespace ID."
+  value       = azurerm_eventhub_namespace.evh.id
 }
 
-output "sa_name" {
-  value       = azurerm_storage_account.sa.name
-  description = "The name of the storage account"
+output "name" {
+  description = "The EventHub Namespace name."
+  value       = azurerm_eventhub_namespace.evh.name
 }
 
-output "sa_primary_access_key" {
-  value       = azurerm_storage_account.sa.primary_access_key
-  description = "The primary access key of the storage account"
+output "default_primary_connection_string" {
+  description = "The primary connection string"
+  value       = azurerm_eventhub_namespace.evh.default_primary_connection_string
   sensitive   = true
 }
 
-output "sa_primary_blob_endpoint" {
-  value       = azurerm_storage_account.sa.primary_blob_endpoint
-  description = "The primary blob endpoint of the storage account"
-}
-
-output "sa_primary_connection_string" {
-  value       = azurerm_storage_account.sa.primary_blob_connection_string
-  description = "The primary blob connection string of the storage account"
+output "default_primary_connection_string_alias" {
+  description = "The primary connection string alias"
+  value       = azurerm_eventhub_namespace.evh.default_primary_connection_string_alias
   sensitive   = true
 }
 
-output "sa_secondary_access_key" {
-  value       = azurerm_storage_account.sa.secondary_access_key
-  description = "The secondary access key of the storage account"
+output "default_primary_key" {
+  description = "The primary key"
+  value       = azurerm_eventhub_namespace.evh.default_primary_key
+  sensitive   = true
+}
+
+output "default_secondary_connection_string" {
+  description = "The primary connection string"
+  value       = azurerm_eventhub_namespace.evh.default_secondary_connection_string
+  sensitive   = true
+}
+
+output "default_secondary_connection_string_alias" {
+  description = "The secondary connection string alias"
+  value       = azurerm_eventhub_namespace.evh.default_secondary_connection_string_alias
+  sensitive   = true
+}
+
+output "default_secondary_key" {
+  description = "The secondary key"
+  value       = azurerm_eventhub_namespace.evh.default_secondary_key
   sensitive   = true
 }

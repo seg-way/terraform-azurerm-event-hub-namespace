@@ -1,3 +1,8 @@
+variable "event_hub_namespace_name" {
+  description = "The name of the event hub namespace"
+  type        = string
+}
+
 variable "identity_ids" {
   description = "Specifies a list of user managed identity ids to be assigned to the VM."
   type        = list(string)
@@ -22,6 +27,12 @@ variable "rg_name" {
     condition     = length(var.rg_name) > 1 && length(var.rg_name) <= 24
     error_message = "Resource group name is not valid."
   }
+}
+
+variable "settings" {
+  description = "Map used to contain all dynamic settings"
+  type        = map(any)
+  default     = {}
 }
 
 variable "tags" {
