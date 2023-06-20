@@ -47,8 +47,9 @@ variable "tags" {
 
 variable "role_assignments" {
   type = list(object({
-    role = string
+    role  = string
     group = string
   }))
+  default     = []
   description = "Role assignments"
 }
