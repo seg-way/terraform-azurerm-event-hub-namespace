@@ -43,3 +43,12 @@ variable "tags" {
     source = "terraform"
   }
 }
+
+
+variable "role_assignments" {
+  type = list(object({
+    role = string
+    group = string
+  }))
+  description = "Role assignments"
+}
