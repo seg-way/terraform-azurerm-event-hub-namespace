@@ -43,3 +43,9 @@ variable "tags" {
     source = "terraform"
   }
 }
+
+variable "public_network_access_enabled" {
+  type = bool
+  default = true
+  description = "Allow Public Acces"
+}

@@ -9,6 +9,7 @@ resource "azurerm_eventhub_namespace" "evh" {
   dedicated_cluster_id     = try(var.settings.dedicated_cluster_id, null)
   maximum_throughput_units = try(var.settings.maximum_throughput_units, null)
   zone_redundant           = try(var.settings.zone_redundant, null)
+  public_network_access_enabled  = var.public_network_access_enabled
 
   dynamic "identity" {
     for_each = length(var.identity_ids) == 0 && var.identity_type == "SystemAssigned" ? [var.identity_type] : []
@@ -29,7 +30,6 @@ resource "azurerm_eventhub_namespace" "evh" {
     for_each = lookup(var.settings, "network_rulesets", {}) != {} ? [1] : []
     content {
       default_action                 = lookup(var.settings.network_rulesets, "default_action", null)
-      public_network_access_enabled = lookup(var.settings.network_rulesets, "public_network_access_enabled", true)
       trusted_service_access_enabled = lookup(var.settings.network_rulesets, "trusted_service_access_enabled", true)
       dynamic "virtual_network_rule" {
         for_each = lookup(var.settings.network_rulesets, "virtual_network_rule", {}) != {} ? [1] : []
