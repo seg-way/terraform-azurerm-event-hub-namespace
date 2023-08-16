@@ -29,8 +29,8 @@ resource "azurerm_eventhub_namespace" "evh" {
     for_each = lookup(var.settings, "network_rulesets", {}) != {} ? [1] : []
     content {
       default_action                 = lookup(var.settings.network_rulesets, "default_action", null)
+      public_network_access_enabled = lookup(var.settings.network_rulesets, "public_network_access_enabled", true)
       trusted_service_access_enabled = lookup(var.settings.network_rulesets, "trusted_service_access_enabled", true)
-
       dynamic "virtual_network_rule" {
         for_each = lookup(var.settings.network_rulesets, "virtual_network_rule", {}) != {} ? [1] : []
         content {
