@@ -50,10 +50,3 @@ resource "azurerm_eventhub_namespace" "evh" {
   }
 }
 
-resource "azurerm_role_assignment" "role_assignment" {
-  # for_each             = var.role_assignments
-  count = length(var.role_assignments)
-  scope                = azurerm_eventhub_namespace.evh.id
-  role_definition_name = var.role_assignments[count.index].role
-  principal_id         = var.role_assignments[count.index].group
-}
