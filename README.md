@@ -1,3 +1,5 @@
+# for namespace
+
 ```hcl
 module "rg" {
   source = "registry.terraform.io/libre-devops/rg/azurerm"
